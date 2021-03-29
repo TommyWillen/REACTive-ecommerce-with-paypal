@@ -1,8 +1,6 @@
 import { Switch, Route } from "react-router-dom";
-import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
 import React from "react";
 import MyNavbar from "./components/MyNavbar/MyNavbar";
 import ProductList from "./components/ProductList/ProductList";
