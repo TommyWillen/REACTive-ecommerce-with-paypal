@@ -1,10 +1,68 @@
 import React from "react";
+import { ProductConsumer } from "../../context";
+import { Link } from "react-router-dom";
+import { ButtonContainer } from "../Button/Button";
+import { Col, Container, Row } from "react-bootstrap";
 
 const Details = () => {
   return (
-    <div>
-      <h3> Hello from Details</h3>
-    </div>
+    <ProductConsumer>
+      {(value) => {
+        const {
+          id,
+          company,
+          img,
+          info,
+          price,
+          title,
+          inCart,
+        } = value.productDetail;
+        return (
+          <Container className="py-5">
+            <Row>
+              <Col
+                xs={10}
+                className="mx-auto, text-center, text-slanted text-blue my-5"
+              >
+                <h1>{title}</h1>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={10} md={6} className="mx-auto my-3">
+                <img src={img} className="image-fluid" alt={title} />
+              </Col>
+              <Col xs={10} md={6} className="mx-auto my-3 text-capitalize">
+                <h2>model: {title}</h2>
+                <h4 className="text-title text-uppercase text-muted mt-3 mb-2">
+                  made by : <span className="text-uppercase">{company}</span>
+                </h4>
+                <h4 className="text-blue">
+                  <strong>price : ${price}</strong>
+                </h4>
+                <p className="text-capitalize font-weight-bold mt-3 mb-0">
+                  About this product
+                </p>
+                <p className="text-muted lead">{info}</p>
+                <div>
+                  <Link to="/">
+                    <ButtonContainer>back to products</ButtonContainer>
+                  </Link>
+                  <ButtonContainer
+                    cart
+                    disabled={inCart ? true : false}
+                    onClick={() => {
+                      value.addToCart(id);
+                    }}
+                  >
+                    {inCart ? "in cart" : "add to cart"}
+                  </ButtonContainer>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        );
+      }}
+    </ProductConsumer>
   );
 };
 
