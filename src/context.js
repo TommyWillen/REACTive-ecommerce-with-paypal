@@ -28,10 +28,8 @@ const ProductProvider = (props) => {
         product.total = price;
         let tempProduct = myCart
         tempProduct.push(product)
-        console.log(myCart)
       setProducts(tempProducts);
         setMyCart(tempProduct);
-        
   };
 
   const loadProducts = () => {
