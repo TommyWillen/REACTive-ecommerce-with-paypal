@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Product from "../Product/Product";
 import { Container, Row } from "react-bootstrap";
 import Title from '../Title/Title'

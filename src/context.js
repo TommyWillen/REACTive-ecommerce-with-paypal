@@ -6,11 +6,32 @@ const ProductContext = React.createContext();
 const ProductProvider = (props) => {
   const [products, setProducts] = useState([]);
   const [productDetail, setProductDetail] = useState(detailProduct);
-  const handleDetail = () => {
-    console.log("hello handle detail");
+  const [myCart, setMyCart] = useState([]);
+
+  const getItem = (id) => {
+    const product = products.find((item) => item.id === id);
+    return product;
   };
-  const addToCart = (id) => {
-    console.log("addToCart id: " + id);
+
+  const handleDetail = (id) => {
+    const product = getItem(id);
+    setProductDetail(product);
+  };
+
+    const addToCart = (id) => {
+        let tempProducts = [...products];
+        const index = tempProducts.indexOf(getItem(id));
+        const product = tempProducts[index];
+        product.inCart = true;
+        product.count = 1;
+        const price = product.price;
+        product.total = price;
+        let tempProduct = myCart
+        tempProduct.push(product)
+        console.log(myCart)
+      setProducts(tempProducts);
+        setMyCart(tempProduct);
+        
   };
 
   const loadProducts = () => {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ProductConsumer } from "../../context";
 import { Card } from "react-bootstrap";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 const ProductWrapper = styled.div`
   .my-card {
@@ -48,49 +48,52 @@ const ProductWrapper = styled.div`
     transition: all 1s linear;
   }
   .img-container:hover .cart-btn {
-    transform: translate(0,0);
+    transform: translate(0, 0);
   }
-  .cart-btn:hover{
+  .cart-btn:hover {
     color: var(--mainBlue);
-    cursor: pointer
+    cursor: pointer;
   }
 `;
-
 
 const Product = (props) => {
   const { id, title, img, price, inCart } = props.product;
   return (
     <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
-      <Card className="my-card">
-        <div
-          className="img-container p-5"
-          onClick={() => console.log("you clicked me?")}
-        >
-          <Link to="/details">
-            <img src={img} alt="product image" className="card-img-top" />
-          </Link>
-          <button
-            className="cart-btn"
-            disabled={inCart ? true : false}
-            onClick={() => console.log("you clicked the cart button")}
-          >
-            {inCart ? (
-              <p className="mb-0" disabled>
-                In Cart
-              </p>
-            ) : (
-              <i className="fas fa-cart-plus" />
-            )}
-          </button>
-        </div>
-        <Card.Footer className="d-flex justify-content-between my-footer">
-          <p className="align-self-center mb-0">{title}</p>
-          <h5 className="text-blue font-italic mb-0">
-            <span className="mr-1">$</span>
-            {price}
-          </h5>
-        </Card.Footer>
-      </Card>
+      <ProductConsumer>
+        {(value) => (
+          <Card className="my-card">
+            <div
+              className="img-container p-5"
+              onClick={() => value.handleDetail(id)}
+            >
+              <Link to="/details">
+                <img src={img} alt="product image" className="card-img-top" />
+              </Link>
+              <button
+                className="cart-btn"
+                disabled={inCart ? true : false}
+                onClick={() => value.addToCart(id)}
+              >
+                {inCart ? (
+                  <p className="mb-0" disabled>
+                    In Cart
+                  </p>
+                ) : (
+                  <i className="fas fa-cart-plus" />
+                )}
+              </button>
+            </div>
+            <Card.Footer className="d-flex justify-content-between my-footer">
+              <p className="align-self-center mb-0">{title}</p>
+              <h5 className="text-blue font-italic mb-0">
+                <span className="mr-1">$</span>
+                {price}
+              </h5>
+            </Card.Footer>
+          </Card>
+        )}
+      </ProductConsumer>
     </ProductWrapper>
   );
 };
@@ -101,8 +104,8 @@ Product.propTypes = {
     img: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
-    inCart: PropTypes.bool
-  }).isRequired
-}
+    inCart: PropTypes.bool,
+  }).isRequired,
+};
 
 export default Product;
