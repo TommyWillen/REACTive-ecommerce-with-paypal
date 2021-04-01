@@ -3,7 +3,8 @@ import Title from "../../Title/Title";
 import CartColumns from "../CartColumns/CartColumns";
 import EmptyCart from "../EmptyCart/EmptyCart";
 import { ProductConsumer } from "../../../context";
-import CartList from '../CartList/CartList'
+import CartList from "../CartList/CartList";
+import CartTotals from "../CartTotals/CartTotals";
 
 const Cart = () => {
   return (
@@ -16,7 +17,8 @@ const Cart = () => {
               <React.Fragment>
                 <Title name="your" title="cart" />
                 <CartColumns />
-                <CartList value={value}/>
+                <CartList value={value} />
+                <CartTotals value={value} />
               </React.Fragment>
             );
           } else {
