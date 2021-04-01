@@ -5,8 +5,9 @@ import React from "react";
 import MyNavbar from "./components/MyNavbar/MyNavbar";
 import ProductList from "./components/ProductList/ProductList";
 import Details from "./components/Details/Details";
-import Cart from "./components/Cart/Cart";
+import Cart from "./components/CartComponents/Cart/Cart";
 import Default from "./components/Default/Default";
+import Modal from './components/Modal/Modal'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/cart" component={Cart} />
         <Route component={Default} />
       </Switch>
+      <Modal/>
     </React.Fragment>
   );
 };
